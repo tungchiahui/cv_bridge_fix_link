@@ -34,8 +34,8 @@
 *  POSSIBILITY OF SUCH DAMAGE.
 *********************************************************************/
 
-#include <cv_bridge/cv_bridge.hpp>
-#include <cv_bridge/rgb_colors.hpp>
+#include <cv_bridge/cv_bridge.h>
+#include <cv_bridge/rgb_colors.h>
 #include <boost/endian/conversion.hpp>
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
@@ -599,8 +599,7 @@ CvImageConstPtr cvtColorForDisplay(
       } else {
         // We choose BGR by default here as we assume people will use OpenCV
         if ((enc::bitDepth(source->encoding) == 8) ||
-          (enc::bitDepth(source->encoding) == 16) ||
-          (enc::bitDepth(source->encoding) == 32))
+          (enc::bitDepth(source->encoding) == 16))
         {
           encoding = enc::BGR8;
         } else {
@@ -650,9 +649,7 @@ CvImageConstPtr cvtColorForDisplay(
 
   // Perform scaling if asked for
   if (options.do_dynamic_scaling) {
-    float inf = std::numeric_limits<float>::infinity();
-    cv::Mat mask = ((source->image!=inf) & (source->image!=-inf));
-    cv::minMaxLoc(source->image, &min_image_value, &max_image_value, NULL, NULL, mask);
+    cv::minMaxLoc(source->image, &min_image_value, &max_image_value);
     if (min_image_value == max_image_value) {
       CvImagePtr result(new CvImage());
       result->header = source->header;
