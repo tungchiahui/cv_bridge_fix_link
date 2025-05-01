@@ -36,7 +36,7 @@ endif()
 find_package(rcpputils REQUIRED)
 find_package(sensor_msgs REQUIRED)
 
-find_package(OpenCV 4 QUIET
+find_package(OpenCV 4.11 EXACT QUIET
   COMPONENTS
     opencv_core
     opencv_imgproc
